@@ -18,7 +18,7 @@ class PcapngAnalyzer:
         self.create_widgets()
 
     def create_widgets(self):
-        # File selection
+
         self.file_path_label = tk.Label(self.master, text="Select PCAPNG file:")
         self.file_path_label.pack()
 
@@ -27,8 +27,7 @@ class PcapngAnalyzer:
 
         self.browse_button = tk.Button(self.master, text="Browse", command=self.browse_file)
         self.browse_button.pack()
-
-        # Protocol selection
+        
         self.protocol_var = tk.StringVar(self.master)
         self.protocol_var.set("All")  # Default selection
         self.protocol_label = tk.Label(self.master, text="Select Protocol:")
@@ -36,7 +35,6 @@ class PcapngAnalyzer:
         self.protocol_menu = tk.OptionMenu(self.master, self.protocol_var, "All", "IPv4", "IPv6", "TCP", "UDP")
         self.protocol_menu.pack()
 
-        # Buttons
         self.analyze_button = tk.Button(self.master, text="Analyze", command=self.analyze_pcapng)
         self.analyze_button.pack()
 
@@ -46,14 +44,12 @@ class PcapngAnalyzer:
         self.sort_button = tk.Button(self.master, text="Sort Packets", command=self.sort_packets)
         self.sort_button.pack()
 
-        # Result display with scrollbar
         self.result_text = tk.Text(self.master, height=10, width=50, wrap=tk.NONE)
         self.result_text.pack(side=tk.LEFT, fill=tk.Y)
         self.result_scrollbar = tk.Scrollbar(self.master, command=self.result_text.yview)
         self.result_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.result_text['yscrollcommand'] = self.result_scrollbar.set
 
-        # Table for displaying sorted results
         self.tree = ttk.Treeview(self.master, columns=("Time", "Source", "Destination", "Protocol"), show="headings")
         self.tree.heading("Time", text="Time")
         self.tree.heading("Source", text="Source")
